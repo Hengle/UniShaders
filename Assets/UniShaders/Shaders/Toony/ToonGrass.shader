@@ -39,7 +39,7 @@ Shader "UniShaders/Toony/Grass" {
             #include "Lighting.cginc"
             #pragma multi_compile_fwdbase_fullshadows
             #pragma multi_compile_fog
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 
+            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
             #pragma target 3.0
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform float4 _MainColor;
@@ -72,14 +72,11 @@ Shader "UniShaders/Toony/Grass" {
                 float4 node_3241 = _Time; // Vetrex Animation
                 float node_9191 = (node_3241.g*_SpeedMultipler);
                 float node_4115 = 0.0;
-                float3 node_2870 = float3(cos(node_9191),node_4115,sin(node_9191));
                 float node_5464_if_leA = step(_BlendVetrexColors,node_4115);
                 float node_5464_if_leB = step(node_4115,_BlendVetrexColors);
                 float node_3411 = ((1.0 - o.uv0.g)*-0.9090909+1.0);
                 float node_5464 = lerp((node_5464_if_leA*node_3411)+(node_5464_if_leB*(1.0-(1.0-node_3411)*(1.0-(1.0 - o.vertexColor.g)))),node_3411,node_5464_if_leA*node_5464_if_leB);
-                float3 node_5305 = lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464);
-                float3 node_2730 = (node_2870*node_5305*node_5464);
-                v.vertex.xyz += node_2730;
+                v.vertex.xyz += (float3(cos(node_9191),node_4115,sin(node_9191))*lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464)*node_5464);
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
                 o.pos = UnityObjectToClipPos( v.vertex );
@@ -130,7 +127,7 @@ Shader "UniShaders/Toony/Grass" {
             #include "Lighting.cginc"
             #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_fog
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 
+            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
             #pragma target 3.0
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform float4 _MainColor;
@@ -163,14 +160,11 @@ Shader "UniShaders/Toony/Grass" {
                 float4 node_3241 = _Time; // Vetrex Animation
                 float node_9191 = (node_3241.g*_SpeedMultipler);
                 float node_4115 = 0.0;
-                float3 node_2870 = float3(cos(node_9191),node_4115,sin(node_9191));
                 float node_5464_if_leA = step(_BlendVetrexColors,node_4115);
                 float node_5464_if_leB = step(node_4115,_BlendVetrexColors);
                 float node_3411 = ((1.0 - o.uv0.g)*-0.9090909+1.0);
                 float node_5464 = lerp((node_5464_if_leA*node_3411)+(node_5464_if_leB*(1.0-(1.0-node_3411)*(1.0-(1.0 - o.vertexColor.g)))),node_3411,node_5464_if_leA*node_5464_if_leB);
-                float3 node_5305 = lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464);
-                float3 node_2730 = (node_2870*node_5305*node_5464);
-                v.vertex.xyz += node_2730;
+                v.vertex.xyz += (float3(cos(node_9191),node_4115,sin(node_9191))*lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464)*node_5464);
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
                 o.pos = UnityObjectToClipPos( v.vertex );
@@ -218,7 +212,7 @@ Shader "UniShaders/Toony/Grass" {
             #pragma fragmentoption ARB_precision_hint_fastest
             #pragma multi_compile_shadowcaster
             #pragma multi_compile_fog
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 
+            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 psp2 n3ds wiiu 
             #pragma target 3.0
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform float _SpeedMultipler;
@@ -241,14 +235,11 @@ Shader "UniShaders/Toony/Grass" {
                 float4 node_3241 = _Time; // Vetrex Animation
                 float node_9191 = (node_3241.g*_SpeedMultipler);
                 float node_4115 = 0.0;
-                float3 node_2870 = float3(cos(node_9191),node_4115,sin(node_9191));
                 float node_5464_if_leA = step(_BlendVetrexColors,node_4115);
                 float node_5464_if_leB = step(node_4115,_BlendVetrexColors);
                 float node_3411 = ((1.0 - o.uv0.g)*-0.9090909+1.0);
                 float node_5464 = lerp((node_5464_if_leA*node_3411)+(node_5464_if_leB*(1.0-(1.0-node_3411)*(1.0-(1.0 - o.vertexColor.g)))),node_3411,node_5464_if_leA*node_5464_if_leB);
-                float3 node_5305 = lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464);
-                float3 node_2730 = (node_2870*node_5305*node_5464);
-                v.vertex.xyz += node_2730;
+                v.vertex.xyz += (float3(cos(node_9191),node_4115,sin(node_9191))*lerp(float3(0,0,0),(float3(1,0,1)*_BlendInfluence),node_5464)*node_5464);
                 o.pos = UnityObjectToClipPos( v.vertex );
                 TRANSFER_SHADOW_CASTER(o)
                 return o;
